@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Configurações básicas da página -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fontes usadas na identidade visual -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Arquivo CSS compartilhado -->
+  <link rel="stylesheet" href="style.css">
+  <title>Aysú | Loja</title>
+<meta name="description" content="Explore vestidos, camisas, calças e conjuntos da Aysú. Filtre por cor, categoria e preço.">
+<meta property="og:site_name" content="Aysú">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Explore vestidos, camisas, calças e conjuntos da Aysú. Filtre por cor, categoria e preço.">
+</head>
+<body>
+<a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
+
+  <header class="header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a class="logo logo-image-link" href="index.html"><img src="logo-aysu.png" alt="Aysú"></a>
+
+      <!-- Botão do menu para celular -->
+      <button class="menu-button" id="menuButton" aria-label="Abrir menu">☰</button>
+
+      <!--
+        Navegação principal.
+        Cada função do site ganhou seu próprio ícone e sua própria página.
+      -->
+      <nav class="icon-nav" id="iconNav">
+        <a class="nav-icon " href="index.html" title="Home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/></svg>
+          <span>Home</span>
+        </a>
+<a class="nav-icon active" href="loja.html" title="Loja">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 9h16l-1 11H5L4 9Z"/><path d="M8 9a4 4 0 0 1 8 0"/></svg>
+          <span>Loja</span>
+        </a>
+<a class="nav-icon " href="produto.html?id=1" title="Produto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 8 8-4 8 4-8 4-8-4Z"/><path d="m4 8 8 4 8-4v8l-8 4-8-4V8Z"/></svg>
+          <span>Produto</span>
+        </a>
+<a class="nav-icon " href="carrinho.html" title="Carrinho">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2l2.2 10.5h10.9l2-7.5H6"/></svg>
+          <span>Carrinho</span>
+        </a>
+<a class="nav-icon " href="favoritos.html" title="Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+          <span>Favoritos</span>
+        </a>
+
+      </nav>
+
+      <a class="nav-icon " href="login.html" title="Entrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+          <span>Entrar</span>
+        </a>
+
+    </div>
+  </header>
+  <main id="mainContent" class="page">
+    <div class="container">
+      <div class="page-title">
+        <span class="eyebrow">LOJA</span>
+        <h1>Escolha seu clima.</h1>
+        <p>
+          Use os filtros para encontrar peças por categoria, cor e faixa de preço.
+        </p>
+      </div>
+
+      <div class="shop-layout">
+        <!-- ========================================================
+             FILTROS
+             O JavaScript lê esses campos e atualiza os produtos.
+             ======================================================== -->
+        <aside class="filters">
+          <h3>Filtrar peças</h3>
+
+          <div class="filter-group">
+            <label for="filterCategory">Categoria</label>
+            <select id="filterCategory">
+              <option value="todos">Todas</option>
+              <option value="vestidos">Vestidos</option>
+              <option value="camisas">Camisas</option>
+              <option value="calcas">Calças</option>
+              <option value="conjuntos">Conjuntos</option>
+              <option value="acessorios">Acessórios</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filterColor">Cor</label>
+            <select id="filterColor">
+              <option value="todos">Todas</option>
+              <option value="verde">Verde</option>
+              <option value="verde-claro">Verde claro</option>
+              <option value="amarelo">Amarelo</option>
+              <option value="azul">Azul</option>
+              <option value="laranja">Laranja</option>
+              <option value="creme">Creme</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Preço</label>
+            <div class="filter-price">
+              <input id="filterMin" type="number" min="0" placeholder="mín.">
+              <input id="filterMax" type="number" min="0" placeholder="máx.">
+            </div>
+          </div>
+        </aside>
+
+        <!-- Área onde os produtos filtrados aparecem -->
+        <section class="shop-results">
+          <div class="product-grid" id="shopGrid"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+<footer class="footer">
+    <div class="footer-brand">
+      <a class="logo logo-image-link footer-logo-image" href="index.html"><img src="logo-aysu.png" alt="Aysú"></a>
+      <p>Moda brasileira para vestir com liberdade, cor e personalidade.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Loja</h4>
+      <a href="loja.html">Todas as peças</a>
+      <a href="favoritos.html">Favoritos</a>
+      <a href="carrinho.html">Carrinho</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>Conta</h4>
+      <a href="login.html">Entrar</a>
+<a href="conta.html">Meus dados e pedidos</a>
+      <a href="login.html#cadastro">Criar conta</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>Aysú</h4>
+      <a href="sobre.html">Nossa história</a>
+      <a href="sobre.html">Valores</a>
+      <a href="admin.html">Administrador</a>
+    </div>
+  </footer>
+
+  <div class="copyright">
+    <span>© 2027 Aysú</span>
+    <span>feito com sol no Brasil ☀</span>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

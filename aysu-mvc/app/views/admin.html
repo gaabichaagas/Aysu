@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Usa seu CSS atual -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Apenas estilos do administrador -->
+  <link rel="stylesheet" href="admin.css">
+
+  <title>Aysú | Administração</title>
+<meta name="description" content="Acesse sua conta Aysú para cuidar dos seus dados e compras.">
+<meta property="og:site_name" content="Aysú">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Acesse sua conta Aysú para cuidar dos seus dados e compras.">
+<meta name="robots" content="noindex,nofollow">
+</head>
+
+<body class="admin-body">
+
+  <header class="admin-header">
+    <div class="admin-header-inner">
+
+      <a class="admin-logo" href="index.html">
+        <img src="logo-aysu.png" alt="Aysú">
+      </a>
+
+      <div class="admin-header-actions">
+        <span class="admin-label">Administrador</span>
+
+        <a href="index.html" class="admin-back-button">
+          voltar ao site
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main id="mainContent" class="admin-main">
+
+    <section class="admin-intro">
+      <span class="eyebrow">AYSÚ ADMIN</span>
+
+      <h1>Gerencie suas peças com facilidade.</h1>
+
+      <p>
+        Cadastre imagem, nome, descrição, preço, categoria,
+        cor, tamanhos e etiqueta. Os produtos salvos passam a
+        fazer parte do catálogo da Aysú.
+      </p>
+    </section>
+
+    <div class="admin-layout">
+
+      <!-- FORMULÁRIO -->
+      <section class="admin-card">
+
+        <div class="admin-card-title">
+          <div>
+            <span class="eyebrow">CADASTRO</span>
+            <h2 id="formTitle">Adicionar nova peça</h2>
+          </div>
+        </div>
+
+        <form id="productForm">
+
+          <input type="hidden" id="productId">
+
+          <div class="admin-form-grid">
+
+            <div class="admin-field admin-full">
+              <label for="productName">Nome da peça</label>
+              <input id="productName" type="text" placeholder="Ex.: Vestido Açaí" required>
+            </div>
+
+            <div class="admin-field">
+              <label for="productCategory">Categoria</label>
+              <select id="productCategory" required>
+                <option value="vestidos">Vestidos</option>
+                <option value="camisas">Camisas</option>
+                <option value="calcas">Calças</option>
+                <option value="conjuntos">Conjuntos</option>
+                <option value="acessorios">Acessórios</option>
+              </select>
+            </div>
+
+            <div class="admin-field">
+              <label for="productPrice">Preço</label>
+              <input id="productPrice" type="number" min="0" step="0.01" placeholder="199,90" required>
+            </div>
+
+            <div class="admin-field admin-full">
+              <label for="productDescription">Legenda / descrição</label>
+              <textarea id="productDescription" rows="4" placeholder="Ex.: Vestido leve em viscose com modelagem fluida..." required></textarea>
+            </div>
+
+            <div class="admin-field admin-full">
+              <label>Cor principal</label>
+
+              <div class="admin-colors">
+
+                <label class="admin-color-option">
+                  <input type="radio" name="productColor" value="verde" checked>
+                  <span style="background:#286641"></span>
+                  Verde
+                </label>
+
+                <label class="admin-color-option">
+                  <input type="radio" name="productColor" value="verde-claro">
+                  <span style="background:#a7c957"></span>
+                  Verde claro
+                </label>
+
+                <label class="admin-color-option">
+                  <input type="radio" name="productColor" value="amarelo">
+                  <span style="background:#f1c925"></span>
+                  Amarelo
+                </label>
+
+                <label class="admin-color-option">
+                  <input type="radio" name="productColor" value="azul">
+                  <span style="background:#007497"></span>
+                  Azul
+                </label>
+
+                <label class="admin-color-option">
+                  <input type="radio" name="productColor" value="laranja">
+                  <span style="background:#c55805"></span>
+                  Laranja
+                </label>
+
+                <label class="admin-color-option">
+                  <input type="radio" name="productColor" value="creme">
+                  <span style="background:#fffeea;border:1px solid #ccc"></span>
+                  Creme
+                </label>
+
+              </div>
+            </div>
+
+            <div class="admin-field admin-full">
+              <label>Tamanhos disponíveis</label>
+
+              <div class="admin-sizes">
+                <label><input type="checkbox" name="productSize" value="PP"> PP</label>
+                <label><input type="checkbox" name="productSize" value="P" checked> P</label>
+                <label><input type="checkbox" name="productSize" value="M" checked> M</label>
+                <label><input type="checkbox" name="productSize" value="G" checked> G</label>
+                <label><input type="checkbox" name="productSize" value="GG"> GG</label>
+                <label><input type="checkbox" name="productSize" value="36"> 36</label>
+                <label><input type="checkbox" name="productSize" value="38"> 38</label>
+                <label><input type="checkbox" name="productSize" value="40"> 40</label>
+                <label><input type="checkbox" name="productSize" value="42"> 42</label>
+              </div>
+            </div>
+
+            <div class="admin-field">
+              <label for="productTag">Etiqueta</label>
+              <select id="productTag">
+                <option value="novo">Novo</option>
+                <option value="queridinho">Queridinho</option>
+                <option value="edição limitada">Edição limitada</option>
+                <option value="essencial">Essencial</option>
+                <option value="promoção">Promoção</option>
+              </select>
+            </div>
+
+            <div class="admin-field">
+              <label for="productTagColor">Cor da etiqueta</label>
+              <select id="productTagColor">
+                <option value="tag-yellow">Amarela</option>
+                <option value="tag-blue">Azul</option>
+                <option value="tag-orange">Laranja</option>
+              </select>
+            </div>
+
+            <div class="admin-field admin-full">
+              <label>Imagem da peça</label>
+
+              <div class="admin-image-options">
+
+                <div>
+                  <span>Enviar do computador</span>
+                  <input id="productImageFile" type="file" accept="image/*">
+                </div>
+
+                <strong>ou</strong>
+
+                <div>
+                  <span>Colar URL da imagem</span>
+                  <input id="productImageUrl" type="url" placeholder="https://...">
+                </div>
+
+              </div>
+
+              <small>
+                No protótipo, os produtos e imagens ficam salvos no navegador.
+              </small>
+            </div>
+
+          </div>
+
+          <div class="admin-preview-section">
+            <label>Prévia da imagem</label>
+
+            <div class="admin-preview">
+              <img id="imagePreview" alt="Prévia do produto">
+              <span id="previewEmpty">Nenhuma imagem selecionada</span>
+            </div>
+          </div>
+
+          <div class="admin-buttons">
+            <button class="admin-save-button" id="saveButton" type="submit">
+              salvar produto
+            </button>
+
+            <button class="admin-cancel-button" id="cancelButton" type="button" hidden>
+              cancelar edição
+            </button>
+          </div>
+
+          <p class="admin-message" id="adminMessage"></p>
+
+        </form>
+      </section>
+
+      <!-- LISTAGEM -->
+      <section class="admin-card">
+
+        <div class="admin-card-title">
+          <div>
+            <span class="eyebrow">CATÁLOGO</span>
+            <h2>Produtos adicionados</h2>
+          </div>
+
+          <span class="admin-product-count" id="productCount">
+            0 produtos
+          </span>
+        </div>
+
+        <div class="admin-product-list" id="productList"></div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="admin.js"></script>
+
+</body>
+</html>

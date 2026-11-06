@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Configurações básicas da página -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fontes usadas na identidade visual -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Arquivo CSS compartilhado -->
+  <link rel="stylesheet" href="style.css">
+  <title>Aysú | Home</title>
+<meta name="description" content="Moda brasileira Aysú: peças cheias de cor, liberdade e personalidade. Explore nossa coleção.">
+<meta property="og:site_name" content="Aysú">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Moda brasileira Aysú: peças cheias de cor, liberdade e personalidade. Explore nossa coleção.">
+</head>
+<body>
+<a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
+
+  <header class="header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a class="logo logo-image-link" href="index.html"><img src="logo-aysu.png" alt="Aysú"></a>
+
+      <!-- Botão do menu para celular -->
+      <button class="menu-button" id="menuButton" aria-label="Abrir menu">☰</button>
+
+      <!--
+        Navegação principal.
+        Cada função do site ganhou seu próprio ícone e sua própria página.
+      -->
+      <nav class="icon-nav" id="iconNav">
+        <a class="nav-icon active" href="index.html" title="Home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/></svg>
+          <span>Home</span>
+        </a>
+<a class="nav-icon " href="loja.html" title="Loja">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 9h16l-1 11H5L4 9Z"/><path d="M8 9a4 4 0 0 1 8 0"/></svg>
+          <span>Loja</span>
+        </a>
+<a class="nav-icon " href="produto.html?id=1" title="Produto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 8 8-4 8 4-8 4-8-4Z"/><path d="m4 8 8 4 8-4v8l-8 4-8-4V8Z"/></svg>
+          <span>Produto</span>
+        </a>
+<a class="nav-icon " href="carrinho.html" title="Carrinho">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2l2.2 10.5h10.9l2-7.5H6"/></svg>
+          <span>Carrinho</span>
+        </a>
+<a class="nav-icon " href="favoritos.html" title="Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+          <span>Favoritos</span>
+        </a>
+
+      </nav>
+
+     <a class="nav-icon " href="login.html" title="Entrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+          <span>Entrar</span>
+        </a>
+
+    </div>
+  </header>
+  <main id="mainContent">
+    <!-- ============================================================
+         HERO / BANNER PRINCIPAL
+         ============================================================ -->
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">COLEÇÃO ALMA TROPICAL</span>
+        <h1>Brasil para <em>vestir.</em></h1>
+        <p>
+          Cores quentes, tecidos leves e peças inspiradas na energia,
+          na natureza e no cotidiano brasileiro.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="loja.html">ver loja</a>
+          <a class="btn btn-outline" href="sobre.html">nossa história</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="blob yellow"></div>
+        <div class="blob blue"></div>
+        <div class="blob green"></div>
+
+        <div class="hero-photo">
+          <img
+            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=90"
+            alt="Look de moda colorido"
+          >
+        </div>
+
+        <div class="hero-badge">feito<br>com ginga</div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         NOVIDADES
+         Os produtos são inseridos automaticamente pelo JavaScript.
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">CHEGOU AGORA</span>
+            <h2>Novidades da semana.</h2>
+          </div>
+          <a class="text-link" href="loja.html">ver tudo →</a>
+        </div>
+
+        <div class="product-grid" id="homeProducts"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MAIS VENDIDOS
+         ============================================================ -->
+    <section class="section" style="background:#fff">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">OS FAVORITOS DA GALERA</span>
+            <h2>Mais vendidos.</h2>
+          </div>
+        </div>
+
+        <div class="product-grid" id="bestSellers"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROMOÇÕES
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">APROVEITA</span>
+            <h2>Promoções com cor.</h2>
+          </div>
+        </div>
+
+        <div class="promo-grid">
+          <article class="promo-main">
+            <span class="eyebrow" style="color:#f1c925">SEMANA AYSÚ</span>
+            <h3>Até 30% OFF em peças selecionadas.</h3>
+            <p>Uma seleção de cores e modelagens para renovar o guarda-roupa.</p>
+            <a class="btn" style="background:#fffeea;color:#c55805" href="loja.html">ver promoções</a>
+          </article>
+
+          <article class="promo-side">
+            <span class="eyebrow" style="color:#c55805">FRETE</span>
+            <h3>Frete grátis acima de R$ 299.</h3>
+            <p>Monte seu look e aproveite.</p>
+            <a class="btn btn-primary" href="loja.html">comprar agora</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+<footer class="footer">
+    <div class="footer-brand">
+      <a class="logo logo-image-link footer-logo-image" href="index.html"><img src="logo-aysu.png" alt="Aysú"></a>
+      <p>Moda brasileira para vestir com liberdade, cor e personalidade.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Loja</h4>
+      <a href="loja.html">Todas as peças</a>
+      <a href="favoritos.html">Favoritos</a>
+      <a href="carrinho.html">Carrinho</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>Conta</h4>
+      <a href="login.html">Entrar</a>
+<a href="conta.html">Meus dados e pedidos</a>
+      <a href="login.html#cadastro">Criar conta</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>Aysú</h4>
+      <a href="sobre.html">Nossa história</a>
+      <a href="sobre.html">Valores</a>
+      <a href="admin.html">Administrador</a>
+    </div>
+  </footer>
+
+  <div class="copyright">
+    <span>© 2027 Aysú</span>
+    <span>feito com sol no Brasil ☀</span>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
