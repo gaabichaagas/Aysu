@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Aysú | Login do administrador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo logo-image-link" href="index.html"><img src="logo-aysu.png" alt="Aysú"></a>
+      <a class="btn btn-outline" href="index.html">Voltar à loja</a>
+    </div>
+  </header>
+  <main id="mainContent" class="page">
+    <div class="container admin-login-container">
+      <div class="page-title">
+        <span class="eyebrow">AYSÚ ADMIN</span>
+        <h1>Acesso do administrador.</h1>
+        <p>Entre com sua conta administrativa para gerenciar as peças da loja.</p>
+      </div>
+      <section class="auth-card" aria-labelledby="adminLoginTitle">
+        <h2 id="adminLoginTitle">Entrar no painel</h2>
+        <p>Use o e-mail e a senha cadastrados para o administrador.</p>
+        <form id="adminLoginForm">
+          <div class="form-group">
+            <label for="adminEmail">E-mail do administrador</label>
+            <input id="adminEmail" name="email" type="email" autocomplete="username" required>
+          </div>
+          <div class="form-group">
+            <label for="adminPassword">Senha</label>
+            <input id="adminPassword" name="password" type="password" autocomplete="current-password" maxlength="200" required>
+          </div>
+          <button class="btn btn-primary" type="submit" disabled>Entrar como administrador</button>
+          <p class="form-message" id="adminLoginMessage" role="status" aria-live="polite">Verificando sessão…</p>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="admin-login.js"></script>
+</body>
+</html>

@@ -1,13 +1,4 @@
-/*
-============================================================
-ADMINISTRADOR AYSÚ
-============================================================
-Salva os produtos em:
-localStorage -> aysuAdminProducts
-============================================================
-*/
-
-const STORAGE_KEY = 'aysuAdminProducts';
+// Administração de peças com sessão e autorização verificadas pelo servidor.
 
 const productForm = document.getElementById('productForm');
 const productId = document.getElementById('productId');
@@ -272,8 +263,13 @@ function escapeHtml(text) {
     .replaceAll("'", '&#039;');
 }
 
+document.getElementById('adminLogout').addEventListener('click',async()=>{
+ try { await adminApi('logout','POST',{}); location.replace('admin-login.html'); }
+ catch(e) { adminMessage.textContent=e.message; }
+});
+
 adminApi('state').then(s=>{
  csrf=s.csrf; adminProducts=s.products;
- if(!s.user?.admin) { productForm.querySelectorAll('input,button,select,textarea').forEach(e=>e.disabled=true); adminMessage.innerHTML='Entre com uma conta administrativa na <a href="login.html">página de login</a>.'; return; }
+ if(!s.user?.admin) { location.replace('admin-login.html'); return; }
  renderProducts();
 }).catch(e=>adminMessage.textContent=e.message);

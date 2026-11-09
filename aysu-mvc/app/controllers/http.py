@@ -36,7 +36,19 @@ class Controller(BaseHTTPRequestHandler):
             if self.command!='GET': return self.send(405,{'error':'Método inválido.'})
             name='index.html' if path=='/' else path.lstrip('/')
             # Explicit allowlist; database and source code cannot be downloaded.
-            folder='app/views' if name in ['index.html','loja.html','produto.html','carrinho.html','favoritos.html','login.html','sobre.html','admin.html','conta.html'] else 'public'
+            if name=='admin.html':
+                cookies=SimpleCookie(self.headers.get('Cookie',''))
+                token=cookies['aysu_session'].value if 'aysu_session' in cookies else ''
+                with store.connect() as db:
+                    admin=db.execute('SELECT 1 FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token=? AND s.expires>=? AND u.admin=1',(token,int(time.time()))).fetchone()
+                if not admin:
+                    self.send_response(302)
+                    self.send_header('Location','/admin-login.html')
+                    self.send_header('Cache-Control','no-store')
+                    self.send_header('Content-Length','0')
+                    self.end_headers()
+                    return
+            folder='app/views' if name in ['index.html','loja.html','produto.html','carrinho.html','favoritos.html','login.html','sobre.html','admin.html','admin-login.html','conta.html'] else 'public'
             if '/' in name or name not in [p.name for p in (store.ROOT/folder).iterdir() if p.is_file()]: return self.send(404,{'error':'Página não encontrada.'})
             import mimetypes
             body=(store.ROOT/folder/name).read_bytes()
@@ -70,7 +82,7 @@ class Controller(BaseHTTPRequestHandler):
                 data=json.loads(self.rfile.read(length) or '{}')
                 if not isinstance(data,dict): raise ValueError('Dados inválidos.')
                 result={'ok':True}
-                if path in ['/api/login','/api/register'] and self.command=='POST':
+                if path in ['/api/login','/api/admin/login','/api/register'] and self.command=='POST':
                     email=str(data.get('email','')).strip().lower(); password=str(data.get('password',''))
                     if not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+',email) or len(password)<6 or len(password)>200: raise ValueError('E-mail ou senha inválidos (mínimo 6 caracteres).')
                     if path.endswith('register'):
@@ -81,6 +93,7 @@ class Controller(BaseHTTPRequestHandler):
                     else:
                         u=db.execute('SELECT * FROM users WHERE email=?',(email,)).fetchone()
                         if not u or not hmac.compare_digest(u['password'],store.password_hash(password,u['password'].split(':')[0])): raise ValueError('E-mail ou senha incorretos.')
+                        if path=='/api/admin/login' and not u['admin']: raise PermissionError('Acesso exclusivo de administrador.')
                         uid=u['id']
                     # Rotate session to prevent fixation; transfer this browser's bag.
                     new=secrets.token_urlsafe(32)

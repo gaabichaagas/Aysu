@@ -25,10 +25,38 @@ class EcommerceTest(unittest.TestCase):
   h.handle_request()
   cookie=headers.get('Set-Cookie')
   if cookie:self.cookie=cookie.split(';')[0]
-  value=json.loads(h.wfile.getvalue())
+  value=json.loads(h.wfile.getvalue() or b'{}')
   if 'csrf' in value:self.csrf=value['csrf']
   if isinstance(value,dict) and 'state' in value and isinstance(value['state'],dict):self.csrf=value['state']['csrf']
   return statuses[0],value
+ def test_admin_access(self):
+  status,state=self.req('/api/state');product=state['products'][0].copy()
+  self.assertEqual(self.req('/admin.html')[0],302)
+  self.assertEqual(self.req('/api/admin/login','POST',{'email':'missing@example.com','password':'segredo123'})[0],400)
+  self.req('/api/register','POST',{'name':'Cliente','email':'cliente@example.com','password':'segredo123','admin':True})
+  self.assertFalse(self.req('/api/state')[1]['user']['admin'])
+  cookie=self.cookie
+  self.assertEqual(self.req('/api/admin/login','POST',{'email':'cliente@example.com','password':'segredo123'})[0],403)
+  self.assertEqual(self.cookie,cookie)
+  self.assertEqual(self.req('/admin.html')[0],302)
+  for path,method in [('/api/products','POST'),('/api/products/1','PUT'),('/api/products/1','DELETE')]:
+   self.assertEqual(self.req(path,method,product)[0],403)
+  with store.connect() as db:
+   db.execute('INSERT INTO users(name,email,password,admin) VALUES (?,?,?,1)',('Admin','admin@example.com',store.password_hash('admin123')))
+  self.assertEqual(self.req('/api/admin/login','POST',{'email':'admin@example.com','password':'errada123'})[0],400)
+  self.assertFalse(self.req('/api/state')[1]['user']['admin'])
+  self.assertEqual(self.req('/api/admin/login','POST',{'email':'admin@example.com','password':'admin123'})[0],200)
+  self.assertNotEqual(self.cookie,cookie)
+  self.assertTrue(self.req('/api/state')[1]['user']['admin'])
+  from production import application
+  from io import BytesIO
+  statuses=[]
+  body=b''.join(application({'REQUEST_METHOD':'GET','PATH_INFO':'/admin.html','HTTP_COOKIE':self.cookie,'wsgi.input':BytesIO()},lambda status,headers:statuses.append(status)))
+  self.assertIn('200',statuses[0]);self.assertIn(b'id="productForm"',body)
+  self.assertEqual(self.req('/api/products','POST',product)[0],200)
+  self.req('/api/logout','POST',{})
+  self.assertEqual(self.req('/admin.html')[0],302)
+  self.assertEqual(self.req('/api/products','POST',product)[0],403)
  def test_full_flow(self):
   status,s=self.req('/api/state');self.assertEqual(status,200);self.assertEqual(len(s['products']),6)
   self.assertEqual(self.req('/api/products','POST',{})[0],403)
@@ -93,8 +121,11 @@ class EcommerceTest(unittest.TestCase):
   self.assertIn('Vestido Pitanga',get('/produto.html','id=1')[2])
   self.assertIn('urlset',get('/sitemap.xml')[2])
   self.assertIn('Disallow: /conta.html',get('/robots.txt')[2])
-  for name in ['conta','carrinho','loja','login','sobre','admin','favoritos']:
+  for name in ['conta','carrinho','loja','login','sobre','admin-login','favoritos']:
    self.assertIn('200',get('/'+name+'.html')[0])
+  status,headers,body=get('/admin.html')
+  self.assertIn('302',status);self.assertEqual(headers['Location'],'/admin-login.html')
+  self.assertNotIn('productForm',body)
   with patch.dict(os.environ,{'COOKIE_SECURE':'1'}):
    _,headers,_=get('/api/state')
    self.assertIn('Secure',headers['Set-Cookie'])

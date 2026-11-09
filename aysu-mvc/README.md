@@ -10,6 +10,8 @@ Versão revisada conforme o enunciado completo fornecido. Preserva o visual orig
 4. Crie uma conta de cliente na página de login. O catálogo é público; adicionar peças à sacola exige login.
 5. Acesse “Meus dados e pedidos” para preencher os dados de teste e acompanhar suas compras.
 
+Para administrar as peças, abra http://localhost:8000/admin-login.html e entre com as credenciais configuradas no passo 2. Somente contas administrativas podem acessar o painel e criar, editar ou excluir peças. Cadastros feitos pelo site são contas de cliente. O botão “Sair” do painel encerra a sessão.
+
 Não abra os HTML diretamente. O servidor cria o banco em `data/aysu.sqlite3`, com seis produtos originais. Uma base anterior desta adaptação é migrada automaticamente, preservando usuários e pedidos existentes. Faça backup do banco antes de atualizar. Carrinho e favoritos persistem por sessão do navegador durante até sete dias; pedidos e perfil são vinculados à conta. Sair encerra a sessão e descarta carrinho e favoritos dela. O histórico permanece.
 
 ## Implementação

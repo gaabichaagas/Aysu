@@ -446,15 +446,22 @@ for (const kind of ['login','register']) {
  });
 }
 function renderAccount() {
- let el=document.getElementById('accountStatus');
- if(!el) { el=document.createElement('div'); el.id='accountStatus'; el.className='container'; document.querySelector('main')?.prepend(el); }
+ document.querySelectorAll('.header a.nav-icon[href="login.html"], .header a.nav-icon[href="conta.html"]').forEach(link=>{
+  link.href=currentUser?'conta.html':'login.html';
+  link.title=currentUser?'Minha conta':'Entrar';
+  const label=link.querySelector('span'); if(label) label.textContent=link.title;
+ });
+ let el=document.getElementById('accountActions');
+ if(!el && document.getElementById('accountArea')) {
+  el=document.createElement('div'); el.id='accountActions'; el.className='account-actions';
+  document.getElementById('accountArea').before(el);
+ }
+ if(!el) return;
  el.replaceChildren();
  if(currentUser) {
-  const text=document.createElement('p'); text.textContent='Olá, '+currentUser.name; el.append(text);
-  const account=document.createElement('a'); account.href='conta.html'; account.textContent='Meus dados e pedidos '; el.append(account);
   const out=document.createElement('button'); out.className='btn btn-outline'; out.textContent='Sair';
   out.onclick=async()=>{await api('logout','POST',{}); location.reload();}; el.append(out);
-  if(currentUser.admin) { const a=document.createElement('a'); a.href='admin.html'; a.textContent=' Administrar produtos'; el.append(a); }
+  if(currentUser.admin) { const a=document.createElement('a'); a.href='admin.html'; a.className='btn btn-primary'; a.textContent='Administrar peças'; el.append(a); }
  }
 }
 async function initialize() {

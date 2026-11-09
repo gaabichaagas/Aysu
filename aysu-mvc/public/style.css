@@ -1545,6 +1545,8 @@ button {
   }
 }
 /* Área do cliente e checkout: quebra de colunas sem rolagem horizontal. */
+.admin-login-container{max-width:580px}
+.account-actions{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 24px}
 .skip-link{position:absolute;left:12px;top:-100px;background:#fff;color:#286641;padding:12px;z-index:9999}.skip-link:focus{top:12px}
 .profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.profile-grid input{width:100%;min-width:0}
 .checkout-form{color:#202020;background:#fff;padding:20px;margin:18px 0}.checkout-form fieldset{margin:20px 0;padding:16px}.checkout-form fieldset label{display:block;margin:12px 0}.checkout-form input[type=radio]{width:auto}
